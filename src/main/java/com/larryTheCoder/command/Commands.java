@@ -150,7 +150,7 @@ public class Commands extends PluginCommand<ASkyBlock> {
                     pageNumber = 1;
                 }
 
-                sender.sendMessage("§9--- §cASkyBlock help §7page §e" + pageNumber + " §7of §e" + totalPage + "§9 ---§r§f");
+                sender.sendMessage("§9--- §cTazo SkyBlock §e" + pageNumber + "§7/§e" + totalPage + "§9 ---§r§f");
                 break;
             case 1:
                 helpList.add("&7isa rename &l&5»&r&f &a" + getPlugin().getLocale(sender).adminHelpRename);

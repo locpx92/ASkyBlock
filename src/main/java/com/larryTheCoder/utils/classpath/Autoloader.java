@@ -84,6 +84,7 @@ public class Autoloader {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Class.forName("org.sqlite.JDBC");
             Class.forName("org.sql2o.Sql2o");
+            Class.forName("org.json.JSONObject");
 
             log.debug("Found required libraries, no download needed.");
             return;
@@ -109,12 +110,14 @@ public class Autoloader {
         File mysqlDriver = new File(Utils.DIRECTORY + targetFolder + File.separator + "mysql-connector-java-8.0.16.jar");
         File sqliteDriver = new File(Utils.DIRECTORY + targetFolder + File.separator + "sqlite-jdbc-3.27.2.1.jar");
         File sql2oDriver = new File(Utils.DIRECTORY + targetFolder + File.separator + "sql2o-1.6.0.jar");
+        File jsonDriver = new File(Utils.DIRECTORY + targetFolder + File.separator + "json-20160810.jar");
 
         try {
             // Step 3: Merge these libraries
-            injectClass(mysqlDriver, "com.mysql.cj.jdbc.Driver");
-            injectClass(sqliteDriver, "org.sqlite.JDBC");
-            injectClass(sql2oDriver, "org.sql2o.Sql2o");
+//            injectClass(mysqlDriver, "com.mysql.cj.jdbc.Driver");
+//            injectClass(sqliteDriver, "org.sqlite.JDBC");
+//            injectClass(sql2oDriver, "org.sql2o.Sql2o");
+            injectClass(jsonDriver, "org.json.JSONObject");
 
             log.debug("Injected database libraries.");
         } catch (Throwable err) {

@@ -169,7 +169,7 @@ public class TopTen implements Listener {
      */
     public static void topTenShow(CommandSender player) {
         // Old chat display
-        player.sendMessage(TextFormat.GOLD + "These are the Top 10 islands:");
+        player.sendMessage(TextFormat.GOLD + "Top 10 đảo:");
         if (topTenList == null) {
             topTenCreate();
         }
@@ -191,7 +191,7 @@ public class TopTen implements Listener {
             }
             if (show) {
                 // Island name + Island level
-                player.sendMessage(TextFormat.AQUA + "#" + i + ": " + playerString + TextFormat.AQUA + " - Island level: " + m.getValue());
+                player.sendMessage(TextFormat.AQUA + "#" + i + ": " + playerString + TextFormat.AQUA + " - Cấp đảo: " + m.getValue());
 
                 if (i++ == 10) {
                     break;

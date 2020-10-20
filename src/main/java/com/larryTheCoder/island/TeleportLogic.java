@@ -85,9 +85,9 @@ public class TeleportLogic implements Listener {
             TaskHandler task = plugin.getServer().getScheduler().scheduleDelayedTask(plugin, () -> {
                 pendingTPs.remove(player.getUniqueId());
                 if (home == 1) {
-                    player.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Teleported to your island");
+                    player.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Đã dịch chuyển đến đảo của bạn");
                 } else {
-                    player.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Teleported to your island #" + home);
+                    player.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Đã dịch chuyển đến đảo của bạn tại #" + home);
                 }
                 player.teleport(targetLoc.add(0, 0.35)); // Adjust spawn heights
                 TaskManager.runTaskLater(new SimpleFancyTitle(plugin, player), 20);

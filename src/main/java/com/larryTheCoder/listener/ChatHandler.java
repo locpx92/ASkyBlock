@@ -55,7 +55,7 @@ public class ChatHandler implements Listener {
         this.teamChatUsers = new ConcurrentHashMap<>();
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onChat(final PlayerChatEvent event) {
         // Substitute variable - thread safe
         String level = "";

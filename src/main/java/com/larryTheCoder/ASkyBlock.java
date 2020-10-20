@@ -36,6 +36,8 @@ import cn.nukkit.plugin.PluginManager;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.ConfigSection;
 import cn.nukkit.utils.TextFormat;
+import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
+import com.creeperface.nukkit.placeholderapi.api.PlaceholderParameters;
 import com.larryTheCoder.cache.FastCache;
 import com.larryTheCoder.cache.settings.WorldSettings;
 import com.larryTheCoder.command.Commands;
@@ -72,6 +74,7 @@ import lombok.Getter;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * @author larryTheCoder
@@ -99,6 +102,19 @@ public class ASkyBlock extends ASkyBlockAPI {
      */
     public static ASkyBlock get() {
         return object;
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void recheck() {
+        File file = new File(ASkyBlock.get().getDataFolder(), "config.yml");
+        Config config = new Config(file, Config.YAML);
+        if (!Utils.isNumeric(config.get("version")) || config.getInt("version", 0) < 2) {
+            file.renameTo(new File(ASkyBlock.get().getDataFolder(), "config.old"));
+            ASkyBlock.get().saveResource("config.yml");
+            Utils.send("&cYour configuration file is outdated! We are creating you new one, please wait...");
+            Utils.send("&aYour old config will be renamed into config.old!");
+        }
+        ASkyBlock.get().cfg.reload(); // Reload the config
     }
 
     @Override
@@ -147,6 +163,7 @@ public class ASkyBlock extends ASkyBlockAPI {
             getServer().getPluginManager().disablePlugin(this);
             getServer().getLogger().info(getPrefix() + "§cRecent exceptions from SB-Core disabled this plugin functionality.");
         }
+        PlaceholderAPI.getInstance().visitorSensitivePlaceholder("has_island", (player, placeholderParameters) -> islandManager.checkIsland(player) ? "true" : "false");
     }
 
     @Override
@@ -292,19 +309,6 @@ public class ASkyBlock extends ASkyBlockAPI {
         worldConfig = new Config(new File(getDataFolder(), "worlds.yml"), Config.YAML);
 
         ConfigManager.load();
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void recheck() {
-        File file = new File(ASkyBlock.get().getDataFolder(), "config.yml");
-        Config config = new Config(file, Config.YAML);
-        if (!Utils.isNumeric(config.get("version")) || config.getInt("version", 0) < 2) {
-            file.renameTo(new File(ASkyBlock.get().getDataFolder(), "config.old"));
-            ASkyBlock.get().saveResource("config.yml");
-            Utils.send("&cYour configuration file is outdated! We are creating you new one, please wait...");
-            Utils.send("&aYour old config will be renamed into config.old!");
-        }
-        ASkyBlock.get().cfg.reload(); // Reload the config
     }
 
     private void generateLevel() {
