@@ -373,6 +373,9 @@ public class ASkyBlock extends ASkyBlockAPI {
      * @return WorldSettings
      */
     public WorldSettings getSettings(String levelName) {
+        if (levelName == null) {
+            return null;
+        }
         return level.stream()
                 .filter(i -> i.getLevel().getName().equalsIgnoreCase(levelName))
                 .findFirst()

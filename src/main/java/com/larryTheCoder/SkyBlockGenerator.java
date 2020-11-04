@@ -64,10 +64,21 @@ public class SkyBlockGenerator extends Generator {
     @Override
     public void generateChunk(int chunkX, int chunkZ) {
         BaseFullChunk chunk = level.getChunk(chunkX, chunkZ);
+        if (chunk == null) {
+            return;
+        }
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 chunk.setBiomeId(x, z, EnumBiome.PLAINS.id);
             }
+        }
+
+        if (chunk.getProvider() == null) {
+            return;
+        }
+
+        if (chunk.getProvider().getLevel() == null) {
+            return;
         }
 
         WorldSettings settings = ASkyBlock.get().getSettings(chunk.getProvider().getLevel().getName());

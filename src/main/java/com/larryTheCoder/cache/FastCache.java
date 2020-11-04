@@ -412,7 +412,7 @@ public class FastCache {
                 }
 
                 // It would be obvious that the player data is not available.
-                if (data.get(0) == null) {
+                if (data == null || data.get(0) == null || data.get(0).rows().size() == 0) {
                     resultOutput.accept(null);
                     return;
                 }
